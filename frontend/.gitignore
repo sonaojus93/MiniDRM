@@ -1,0 +1,38 @@
+# Node modules
+node_modules/
+
+# Env config
+.env
+.env.local
+.env.development
+.env.production
+
+# Build output
+dist/
+build/
+out/
+
+# TypeScript
+*.tsbuildinfo
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Cache
+.cache/
+.vite/
+.next/
+.temp/
+
+# VSCode
+.vscode/
+
+# Optional IDEs
+.idea/
+*.swp
+*.swo
+*.sublime-workspace
