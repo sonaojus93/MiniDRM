@@ -9,6 +9,7 @@ const prisma = new PrismaClient();
 export async function uploadEncryptedVideo(req: Request, res: Response) {
     const { title } = req.body;
     const file = req.file;
+    console.log("💾 req.file:", req.file);
 
     if (!file || !title) {
         return res.status(400).json({ message: 'Missing title or video' });
@@ -21,6 +22,7 @@ export async function uploadEncryptedVideo(req: Request, res: Response) {
     const ivHex = iv.toString('hex');
 
     const inputPath = file.path;
+    console.log("💾 inputPath:", inputPath);
     const encryptedDir = path.join(__dirname, '../../encrypted_videos');
     if (!fs.existsSync(encryptedDir)) {
         fs.mkdirSync(encryptedDir, { recursive: true });
@@ -28,18 +30,23 @@ export async function uploadEncryptedVideo(req: Request, res: Response) {
 
     const outputFilename = `${Date.now()}-${file.originalname}`;
     const outputPath = path.join(encryptedDir, outputFilename);
+    console.log("💾 outputFilename:", outputFilename);
 
-    encryptFile(inputPath, outputPath, key, iv);
-    fs.unlinkSync(inputPath); // clean unencrypted upload
+    await encryptFile(inputPath, outputPath, key, iv); // ✅ wait for full completion
+    fs.unlinkSync(inputPath); // 💣 only delete after encrypt finishes
 
-    await prisma.video.create({
+    let dt = {
         data: {
             title,
             filePath: outputFilename,
             aesKey: keyHex,
             aesIv: ivHex,
         },
-    });
+    };
+    console.log("💾 dt:", dt);
+
+    await prisma.video.create(dt);
+    console.log("successfull");
 
     res.json({ message: 'Encrypted video uploaded successfully!' });
 }

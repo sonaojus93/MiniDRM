@@ -10,7 +10,7 @@ export function encryptFile(inputPath: string, outputPath: string, key: Buffer, 
     const cipher = crypto.createCipheriv(algorithm, key, iv);
     const input = fs.createReadStream(inputPath);
     const output = fs.createWriteStream(outputPath);
-
+    console.log("💾 output:");
     input.pipe(cipher).pipe(output);
 }
 
