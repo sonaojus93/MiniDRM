@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 async function main() {
     const userEmail = 'TEST@GMAIL.COM';  // 👈 Replace this
-    const videoTitle = 'Sample';     // 👈 Replace this
+    const videoTitle = 'Thumbayum Thulasiyum';     // 👈 Replace this
 
     // Get user
     const user = await prisma.user.findUnique({

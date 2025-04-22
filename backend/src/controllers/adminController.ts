@@ -2,17 +2,19 @@ import crypto from 'crypto';
 import path from 'path';
 import fs from 'fs';
 import { encryptFile } from '../utils/encryption';
+import { Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export async function uploadEncryptedVideo(req: Request, res: Response) {
+export const uploadEncryptedVideo = async (req: Request, res: Response): Promise<void> => {
     const { title } = req.body;
     const file = req.file;
     console.log("💾 req.file:", req.file);
 
     if (!file || !title) {
-        return res.status(400).json({ message: 'Missing title or video' });
+        res.status(400).json({ message: 'Missing title or video' });
+        return;
     }
 
     const key = crypto.randomBytes(32);
@@ -49,4 +51,5 @@ export async function uploadEncryptedVideo(req: Request, res: Response) {
     console.log("successfull");
 
     res.json({ message: 'Encrypted video uploaded successfully!' });
-}
+};
+

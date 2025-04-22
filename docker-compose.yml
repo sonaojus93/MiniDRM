@@ -11,16 +11,25 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "5433:5432"
 
   backend:
     build: ./backend
     ports:
-      - "5000:5000"
+      - "5050:5050"
     depends_on:
       - db
     environment:
-      DATABASE_URL: postgres://postgres:postgres@db:5432/minidrm
+      DATABASE_URL: postgres://postgres:postgres@db:5433/minidrm
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      REACT_APP_BACKEND_URL: http://localhost:5050
 
 volumes:
   pgdata:

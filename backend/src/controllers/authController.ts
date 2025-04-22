@@ -5,14 +5,16 @@ import { generateToken } from '../utils/generateToken';
 
 const prisma = new PrismaClient();
 
-export async function register(req: Request, res: Response) {
+export const register = async (req: Request, res: Response): Promise<void> => {
     const { email, password, role } = req.body;
 
     const existingUser = await prisma.user.findUnique({ where: { email } });
-    if (existingUser) return res.status(400).json({ message: 'Email already in use' });
+    if (existingUser) {
+        res.status(400).json({ message: 'Email already in use' });
+        return;
+    }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-
     const user = await prisma.user.create({
         data: { email, password: hashedPassword, role },
     });
@@ -21,14 +23,14 @@ export async function register(req: Request, res: Response) {
     res.json({ token, user: { id: user.id, email: user.email, role: user.role } });
 }
 
-export async function login(req: Request, res: Response) {
+export const login = async (req: Request, res: Response): Promise<void> => {
     const { email, password } = req.body;
 
     const user = await prisma.user.findUnique({ where: { email } });
     if (!user || !(await bcrypt.compare(password, user.password))) {
-        return res.status(401).json({ message: 'Invalid credentials' });
+        res.status(401).json({ message: 'Invalid credentials' });
+    } else {
+        const token = generateToken(user.id, user.role);
+        res.json({ token, user: { id: user.id, email: user.email, role: user.role } });
     }
-
-    const token = generateToken(user.id, user.role);
-    res.json({ token, user: { id: user.id, email: user.email, role: user.role } });
 }
