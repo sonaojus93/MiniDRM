@@ -51,36 +51,38 @@ export default function AdminUpload() {
     };
 
     return (
-        <div className="p-6 max-w-lg mx-auto">
-            <h2 className="text-2xl font-bold mb-4">🔐 Admin Upload & Encrypt</h2>
-            <form onSubmit={handleUpload} className="space-y-4">
-                <input
-                    type="text"
-                    placeholder="Video Title"
-                    className="w-full border px-3 py-2 rounded"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    required
-                />
+        <div className="max-w-screen min-h-screen rounded shadow flex h-screen text-center px-10">
+            <div className="m-auto bg-black p-20 rounded shadow-lg">
+                <h2 className="text-2xl font-bold mb-4">🔐 Admin Upload & Encrypt</h2>
+                <form onSubmit={handleUpload} className="space-y-4">
+                    <input
+                        type="text"
+                        placeholder="Video Title"
+                        className="w-full border px-3 py-2 rounded"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        required
+                    />
 
-                <input
-                    type="file"
-                    accept="video/mp4"
-                    className="w-full"
-                    onChange={(e) => setVideoFile(e.target.files?.[0] || null)}
-                    required
-                />
+                    <input
+                        type="file"
+                        accept="video/mp4"
+                        className="w-full"
+                        onChange={(e) => setVideoFile(e.target.files?.[0] || null)}
+                        required
+                    />
 
-                <button
-                    type="submit"
-                    className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
-                >
-                    Upload & Encrypt
-                </button>
-            </form>
+                    <button
+                        type="submit"
+                        className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
+                    >
+                        Upload & Encrypt
+                    </button>
+                </form>
 
-            {message && <p className="mt-4 text-green-600">{message}</p>}
-            {error && <p className="mt-4 text-red-600">{error}</p>}
+                {message && <p className="mt-4 text-green-600">{message}</p>}
+                {error && <p className="mt-4 text-red-600">{error}</p>}
+            </div>
         </div>
     );
 }

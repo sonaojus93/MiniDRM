@@ -74,7 +74,7 @@ export default function Watch() {
     }, [id]);
 
     return (
-        <div className="p-4">
+        <div className="max-w-screen min-h-screen rounded shadow px-10">
             <h2 className="text-2xl font-semibold mb-4">🎥 Secure Video Stream</h2>
 
             {loading && !error && (
@@ -85,8 +85,10 @@ export default function Watch() {
                 <div className="text-red-600 font-bold mt-2">{error}</div>
             )}
 
-            <div data-vjs-player className="rounded overflow-hidden">
-                <video ref={videoRef} className="video-js vjs-big-play-centered" />
+            <div data-vjs-player className="max-w-3xl max-h-120 bg-black">
+                <video id="example_video_1" className="video-js vjs-default-skin" controls
+                    preload="auto" width="100" height="100" poster="my_video_poster.png"
+                    data-setup="{}" ref={videoRef} />
             </div>
         </div>
     );

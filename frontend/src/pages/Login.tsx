@@ -47,36 +47,38 @@ export default function Login() {
     };
 
     return (
-        <div className="max-w-md mx-auto mt-10 p-6 rounded shadow ">
-            <h2 className="text-2xl font-bold mb-4">Login</h2>
-            <form onSubmit={handleLogin} className="space-y-4">
-                <input
-                    type="email"
-                    required
-                    className="w-full border px-3 py-2 rounded"
-                    placeholder="Email"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                />
-                <input
-                    type="password"
-                    required
-                    className="w-full border px-3 py-2 rounded"
-                    placeholder="Password"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                />
-                <button
-                    type="submit"
-                    className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
-                >
-                    Login
-                </button>
-            </form>
+        <div className="max-w-lg min-h-screen flex items-center rounded shadow text-center bg-black px-10">
+            <div>
+                <h2 className="text-2xl font-bold mb-4">Login</h2>
+                <form onSubmit={handleLogin} className="space-y-4">
+                    <input
+                        type="email"
+                        required
+                        className="w-full border px-3 py-2 rounded h-15"
+                        placeholder="Email"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                    />
+                    <input
+                        type="password"
+                        required
+                        className="w-full border px-3 py-2 rounded h-15"
+                        placeholder="Password"
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                    />
+                    <button
+                        type="submit"
+                        className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 h-15"
+                    >
+                        Login
+                    </button>
+                </form>
 
-            {error && (
-                <p className="mt-4 text-red-600 font-medium">{error}</p>
-            )}
+                {error && (
+                    <p className="mt-4 text-red-600 font-medium">{error}</p>
+                )}
+            </div>
         </div>
     );
 }

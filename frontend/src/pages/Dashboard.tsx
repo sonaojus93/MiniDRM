@@ -34,20 +34,22 @@ export default function Dashboard() {
             {videos.length === 0 ? (
                 <p className="text-gray-600">No licensed videos yet.</p>
             ) : (
-                <ul className="space-y-4">
+                <div className="grid grid-cols-5 gap-5">
                     {videos.map(video => (
-                        <li key={video.id} className="flex justify-between items-center p-4 shadow rounded">
-                            <span>{video.title}</span>
+                        <div className='bg-black text-white p-4 rounded shadow text-center' key={video.id}>
+                            <div>{video.title}</div>
+                            <br />
                             <button
                                 onClick={() => navigate(`/watch/${video.id}`)}
                                 className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
                             >
                                 Watch Now
                             </button>
-                        </li>
+                        </div>
                     ))}
-                </ul>
-            )}
-        </div>
+                </div>
+            )
+            }
+        </div >
     );
 }

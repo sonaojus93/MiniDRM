@@ -11,8 +11,8 @@ export default function Navbar() {
     };
 
     return (
-        <nav className=" shadow p-4 flex justify-between items-center">
-            <h3 className="text-xl font-bold ">🔒 Mini-DRM</h3>
+        <nav className="bg-black shadow p-4 flex justify-between items-center">
+            <h3 className="text-xl font-bold ">Mini-DRM</h3>
             <div className="space-x-4 flex items-center">
                 {token ? (
                     <>
@@ -28,8 +28,8 @@ export default function Navbar() {
                     </>
                 ) : (
                     <>
-                        <Link to="/login" className="text-blue-600 hover:underline">Login</Link>
-                        <Link to="/register" className="text-blue-600 hover:underline">Register</Link>
+                        <Link to="/login" className="text-white hover:underline">Login</Link>
+                        <Link to="/register" className="text-white hover:underline">Register</Link>
                     </>
                 )}
             </div>
